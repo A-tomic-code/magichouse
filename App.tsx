@@ -1,10 +1,9 @@
 import * as Font from "expo-font";
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect } from "react";
+import React from "react";
 import { View } from "react-native";
 import { Provider } from "react-redux";
 import { NativeRouter, Route, Routes } from "react-router-native";
-import { isWeb } from "./src/constants";
 import { DashboardScreen } from "./src/screens/Dashboard.screen";
 import { LoginScreen } from "./src/screens/Login.screen";
 import { store } from "./src/store";
