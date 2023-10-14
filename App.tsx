@@ -9,6 +9,8 @@ import { LoginScreen } from "./src/screens/Login.screen";
 import { store } from "./src/store";
 import styles, { fontFamily } from "./src/theme";
 
+//probando git
+
 export default function App() {
 	const [fontsLoaded] = Font.useFonts(fontFamily);
 
