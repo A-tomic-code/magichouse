@@ -1,7 +1,6 @@
-import { AppDispatch, useAppDispatch } from "./../store";
-import { LoginData } from "./../types.d";
+import { useAppDispatch } from "./../store";
+import { LoginData } from "../types/request";
 import { authenticateUser } from "../services/User.service";
-import { useDispatch } from "react-redux";
 import { LOGIN } from "../slices/user.slice";
 export const useUser = () => {
 	const dispatch = useAppDispatch();

@@ -1,5 +1,5 @@
 import { Text } from "react-native";
-import { StyledTextProps } from "../../types";
+import { StyledTextProps } from "../../types/components";
 import { textStyle } from "../../theme";
 
 export const StyledText = ({

@@ -14,17 +14,19 @@ import styles, { fontFamily } from "./src/theme";
 export default function App() {
 	const [fontsLoaded] = Font.useFonts(fontFamily);
 
+	if (!fontsLoaded) return null;
+
 	return (
-		<Provider store={store}>
-			<NativeRouter>
-				<View style={styles.root}>
+		<View style={styles.root}>
+			<Provider store={store}>
+				<NativeRouter>
 					<Routes>
 						<Route path="/" Component={LoginScreen} />
 						<Route path="/dashboard" Component={DashboardScreen} />
 					</Routes>
 					<StatusBar style="auto" />
-				</View>
-			</NativeRouter>
-		</Provider>
+				</NativeRouter>
+			</Provider>
+		</View>
 	);
 }

@@ -1,4 +1,4 @@
-import { StyledTextStyle } from "./types";
+import { StyledTextStyle } from "./types/style";
 
 import { StyleSheet, Platform } from "react-native";
 import { container } from "./styles/container.style";
@@ -46,41 +46,25 @@ export const fontFamily = {
 
 export const textStyle = StyleSheet.create({
 	text: {
-		fontFamily: Platform.select({
-			web: "Roboto-Regular",
-			ios: "Roboto-Regular",
-			android: "Roboto",
-		}),
+		fontFamily: "Roboto-Regular",
 		fontSize: 16,
 		color: colorPallete.primary,
 		letterSpacing: 1,
 		width: "100%",
 	},
 	heading: {
-		fontFamily: Platform.select({
-			web: "Roboto-Black",
-			ios: "Roboto-Black",
-			android: "Roboto",
-		}),
+		fontFamily: "Roboto-Black",
 		fontSize: 72,
 		color: colorPallete.secondary,
 		fontWeight: isWeb ? null : "600",
 	},
 	title: {
-		fontFamily: Platform.select({
-			web: "Roboto-Bold",
-			ios: "Roboto-Bold",
-			android: "Roboto",
-		}),
+		fontFamily: "Roboto-Bold",
 		fontSize: 40,
 		letterSpacing: 1.5,
 	},
 	subtitle: {
-		fontFamily: Platform.select({
-			web: "Roboto-Medium",
-			ios: "Roboto-Medium",
-			android: "Roboto",
-		}),
+		fontFamily: "Roboto-Medium",
 		fontSize: 32,
 		fontWeight: isWeb ? null : "400",
 		letterSpacing: 3,
@@ -92,11 +76,7 @@ export const textStyle = StyleSheet.create({
 		fontSize: 12,
 	},
 	bold: {
-		fontFamily: Platform.select({
-			web: "Roboto-Bold",
-			ios: "Roboto-Bold",
-			android: "Roboto-Bold",
-		}),
+		fontFamily: "Roboto-Bold",
 		fontWeight: isWeb ? null : "bold",
 	},
 	white: {

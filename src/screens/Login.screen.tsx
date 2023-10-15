@@ -4,9 +4,10 @@ import theme from "../theme";
 import { Screen } from "../components/Screen/Screen.component";
 
 export const LoginScreen = () => {
+	const style = [theme.screen, theme.loginScreen];
 	return (
-		<Screen style={theme.loginScreen}>
+		<View style={style}>
 			<LoginForm />
-		</Screen>
+		</View>
 	);
 };

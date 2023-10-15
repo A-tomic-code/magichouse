@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import * as userModel from "../manager/user.manager";
-import { User } from "../model/User.interface";
+import { User } from "../types/user";
 
 const router = Router();
 
@@ -18,5 +18,8 @@ const router = Router();
 // 	}
 // };
 
-router.route("/test").post(() => {});
+router.route("/test").post((req, res) => {
+	console.log("test");
+	res.send("test");
+});
 export default router;

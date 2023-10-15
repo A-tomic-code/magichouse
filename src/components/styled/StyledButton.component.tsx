@@ -2,7 +2,7 @@ import { StyleSheet, Text } from "react-native";
 import colorPallete from "../../styles/colorPallete";
 import { Pressable } from "react-native";
 import { isWeb } from "../../constants";
-import { StyledButtonProps } from "../../types";
+import { StyledButtonProps } from "../../types/components";
 import { StyledText } from "./StyledText.component";
 
 export const StyledButton = ({

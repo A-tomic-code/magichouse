@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import { sendError, sendOK } from "../utils";
-import * as userModel from "../manager/user.manager";
+import * as userManager from "../manager/user.manager";
 
 export function login(req: Request, res: Response) {
 	const { email, password } = req.body;
 
+	//TODO implement login
 	if (email === "admin" && password === "admin") {
 		sendOK(res, {
 			id: 1,
@@ -19,13 +20,9 @@ export async function create(req: Request, res: Response) {
 	const { email, password, username } = req.body;
 
 	try {
-		const result = await userModel.create({ email, username }, password);
-
-		if (result.insertId) {
-			sendOK(res, `User succesfully inserted on DB with ID -> ${result.insertId}`);
-		}
+		const result = await userManager.create({ email, username }, password);
+		sendOK(res, `User succesfully inserted on DB with ID -> ${result}`);
 	} catch (err: any) {
-		console.error(err);
 		sendError(res, err.message);
 	}
 }
@@ -35,13 +32,13 @@ export async function getUser(req: Request, res: Response) {
 
 	try {
 		if (!isNaN(id)) {
-			const result = await userModel.getById(id);
-			result.length ? sendOK(res, result) : sendError(res, "User not found");
+			const result = await userManager.getById(id);
+			sendOK(res, result);
 		} else {
-			const result = await userModel.getAll();
+			const result = await userManager.getAll();
 			sendOK(res, result);
 		}
 	} catch (err: any) {
-		sendError(res, err.message);
+		sendError(res, err);
 	}
 }

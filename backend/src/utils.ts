@@ -9,7 +9,7 @@ export function sendOK(response: Response, data: any) {
 }
 
 export function sendError(response: Response, message: string) {
-	response.status(500).send({
+	response.send({
 		status: "error",
 		data: [message]
 	});

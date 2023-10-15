@@ -8,7 +8,7 @@ import { useAppSelector } from "../store";
 import { Screen } from "../components/Screen/Screen.component";
 
 export const DashboardScreen = () => {
-	const user = useAppSelector((state) => state.user);
+	// const user = useAppSelector((state) => state.user);
 
 	return (
 		<Screen style={styles.root}>

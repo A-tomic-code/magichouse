@@ -1,5 +1,4 @@
 import { ViewStyle, ImageStyle } from "react-native";
-import { isWeb } from "../constants";
 
 export const loginScreen: ViewStyle = {
 	justifyContent: "center",

@@ -1,31 +1,41 @@
-import { connect } from "../db";
 import { crypt } from "../utils";
-import { ResultSetHeader, RowDataPacket } from "mysql2";
-import { DBResult_User, User } from "../model/User.interface";
+import { User } from "../types/user";
+import * as db from "../db";
 
-const connection = connect();
-
-export async function getAll(): Promise<DBResult_User[]> {
+export async function getAll() {
 	const sql = "SELECT id, email, username FROM user";
-	const [rows] = await connection.execute<DBResult_User[]>(sql);
+	const rows = db.select(sql);
 	return rows;
 }
 
-export async function getById(id: number): Promise<DBResult_User[]> {
+export async function getById(id: number) {
 	const sql = "SELECT id, email, username FROM user WHERE id = ?";
-	const [rows] = await connection.execute<DBResult_User[]>(sql, [id]);
-	return rows;
+	return new Promise(async (resolve, reject) => {
+		try {
+			const result = await db.select(sql, [id]);
+
+			if (result && result.length === 0) {
+				reject(`User not found with id --> ${id}`);
+			}
+
+			resolve(result);
+		} catch (err) {
+			console.error("[Database] ❌ ERROR GETTING USER BY ID ");
+			console.error(err);
+			reject(err);
+		}
+	});
 }
 
-export async function getByEmail(email: string): Promise<DBResult_User[]> {
+export async function getByEmail(email: string) {
 	const sql = "SELECT id, email, password, username FROM user WHERE email = ?";
-	const [rows] = await connection.execute<DBResult_User[]>(sql, [email]);
+	const rows = db.select(sql, [email]);
 	return rows;
 }
 
-export async function getByUsername(username: string): Promise<DBResult_User[]> {
+export async function getByUsername(username: string) {
 	const sql = "SELECT id, email, password, username FROM user WHERE username = ?";
-	const [rows] = await connection.execute<DBResult_User[]>(sql, [username]);
+	const rows = db.select(sql, [username]);
 	return rows;
 }
 
@@ -41,28 +51,29 @@ export async function create(user: User, password: string) {
 
 	const sql = "INSERT INTO user (email, password, username) VALUES (?, ?, ?)";
 
-	const [result] = await connection.execute<ResultSetHeader>(sql, [
-		user.email,
-		passwordHash,
-		user.username
-	]);
-
-	console.log("result", result.insertId);
-
-	return result;
+	return new Promise(async (resolve, reject) => {
+		try {
+			const result = await db.insert(sql, [user.email, passwordHash, user.username]);
+			resolve(result);
+		} catch (err) {
+			console.error("[Database] ❌ ERROR INSERTING USER ");
+			console.error(err);
+			reject(err);
+		}
+	});
 }
 
-export async function update(id: number, newUser: User): Promise<RowDataPacket[]> {
+export async function update(id: number, newUser: User) {
 	const sql = "UPDATE user SET email = ?, username = ? WHERE id = ?";
 	const params = [newUser.email, newUser.username, id];
-	const [result] = await connection.execute<RowDataPacket[]>(sql, params);
+	const result = db.update(sql, params);
 
 	return result;
 }
 
-export async function remove(id: number): Promise<RowDataPacket[]> {
+export async function remove(id: number) {
 	const sql = "DELETE FROM user WHERE id = ?";
-	const [result] = await connection.execute<RowDataPacket[]>(sql, [id]);
+	const result = db.deleteRecord(sql, [id]);
 
 	return result;
 }
